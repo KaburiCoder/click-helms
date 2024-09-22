@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-client-depl
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-client
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-client
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-client
+        image: "{{ .Values.hsClient.image.name }}:{{ .Values.hsClient.image.version }}"
+        env:
+        - name: NEXT_PUBLIC_KAKAO_JS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: next_public_kakao_js_key

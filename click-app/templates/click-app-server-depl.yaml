@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-server-depl
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-server
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-server
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-server
+        image: "{{ .Values.server.image.name }}:{{ .Values.server.image.version }}"
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: MONGODB_URL
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: mongodb_url
+        - name: MONGODB_HS_URL
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: mongodb_hs_url
+        - name: JWT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: jwt_key
+        - name: JWT_REF_KEY
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: jwt_key        
+        - name: JWT_RF_KEY
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: jwt_rf_key
+        - name: JWT_EXP
+          value: "1d"
+        - name: JWT_RF_EXP
+          value: "14d"
+        - name: MAIL_SERVICE
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: mail_service
+        - name: MAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: mail_host
+        - name: MAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: mail_port
+        - name: MAIL_USER
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: mail_user
+        - name: MAIL_PASS
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: mail_pass

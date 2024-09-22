@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-server-depl
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-server
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-server
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-server
+        image: "{{ .Values.server.image.name }}:{{ .Values.server.image.version }}"
+        env:
+        - name: CLICK_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: click-log-secr
+              key: click_database_url
+        - name: CPM_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: click-log-secr
+              key: cpm_database_url
+        - name: NODE_ENV
+          value: production

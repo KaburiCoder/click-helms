@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hs
+description: ClickDesk, 웹 문진표
+type: application
+version: 0.1.0
+appVersion: "1.16.0"

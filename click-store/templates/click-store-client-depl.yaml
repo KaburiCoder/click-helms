@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-client-depl
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-client
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-client
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-client
+        image: "{{ .Values.client.image.name }}:{{ .Values.client.image.version }}"
+        env:
+        - name: NODE_ENV
+          value: development
+        - name: NEXTAUTH_URL
+          value: https://www.click-soft.shop
+        - name: NEXT_PUBLIC_CLICK_DOMAIN
+          value: www.click-soft.shop
+        - name: NEXT_PUBLIC_APP_ENV
+          value: prod
+        - name: SMTP_SERVICE
+          valueFrom:
+            secretKeyRef:
+              name: smtp-secr
+              key: smtp_service
+        - name: SMTP_HOST
+          valueFrom:
+            secretKeyRef:
+              name: smtp-secr
+              key: smtp_host
+        - name: SMTP_PORT
+          valueFrom:
+            secretKeyRef:
+              name: smtp-secr
+              key: smtp_port
+        - name: SMTP_AUTH_USER
+          valueFrom:
+            secretKeyRef:
+              name: smtp-secr
+              key: smtp_auth_user
+        - name: SMTP_AUTH_PASS
+          valueFrom:
+            secretKeyRef:
+              name: smtp-secr
+              key: smtp_auth_pass
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: click-store-secr
+              key: database_url
+        - name: CLICK_ENC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: click-store-secr
+              key: click_enc_key
+        - name: AUTH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: click-store-secr
+              key: auth_secret
+              #  여기부터 개인별
+        - name: TOSSPAYMENTS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: click-store-secr
+              key: tosspayments_secret_key
+        - name: NEXT_PUBLIC_TOSSPAYMENTS_CLIENT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: click-store-secr
+              key: next_public_tosspayments_client_key

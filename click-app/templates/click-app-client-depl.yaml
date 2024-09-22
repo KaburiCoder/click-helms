@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-client-depl
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-client
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-client
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-client
+        image: "{{ .Values.client.image.name }}:{{ .Values.client.image.version }}"
+        env:
+        - name: AUTH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: auth_secret
+        - name: MONGODB_URL
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: mongodb_url
+        - name: NEXT_PUBLIC_MEASUREMENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: next_public_measurement_id
+        - name: AUTH_GOOGLE_ID
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: auth_google_id
+        - name: AUTH_GOOGLE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: click-app-secr
+              key: auth_google_secret

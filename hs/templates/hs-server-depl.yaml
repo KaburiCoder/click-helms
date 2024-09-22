@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-server-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-server
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-server
+        update: latest
+    spec:
+      # dnsPolicy: "None"  # Pod의 DNS 정책을 None으로 설정하여 Kubernetes의 DNS 설정을 무시합니다.
+      # dnsConfig:
+      #   nameservers:
+      #     - 168.126.63.1
+      #     - 210.220.163.82
+      #     - 8.8.8.8
+      #     # - 8.8.4.4
+      containers:
+      - name: {{ .Release.Name }}-server
+        image: "{{ .Values.hsServer.image.name }}:{{ .Values.hsServer.image.version }}"
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "4020"
+        - name: BASE_URL
+          value: "https://hs.click-soft.co.kr"
+        - name: SMTP_SERVICE
+          value: naver
+        - name: SMTP_HOST
+          value: smtp.naver.com
+        - name: SMTP_PORT
+          value: "465"
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: mongo_uri
+        - name: JWT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: jwt_key
+        - name: ADMIN_KEY
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: admin_key
+        - name: SMTP_AUTH_USER
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: smtp_auth_user
+        - name: SMTP_AUTH_PASS
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: smtp_auth_pass
+        - name: SFTP_HOST
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: sftp_host
+        - name: SFTP_USER
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: sftp_user
+        - name: SFTP_PASS
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: sftp_pass
+        - name: SFTP_PORT
+          valueFrom:
+            secretKeyRef:
+              name: hs-secr
+              key: sftp_port

@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-server-depl
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-server
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-server
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-server
+        image: "{{ .Values.server.image.name }}:{{ .Values.server.image.version }}"
