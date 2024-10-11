@@ -23,7 +23,7 @@ testClient:
 server:
   image:
     name: "kaburi/click-store-server"
-    version: "1"
+    version: "2"
   service:
     protocol: TCP
     port: 4000
