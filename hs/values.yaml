@@ -15,7 +15,7 @@ hsClient:
 hsServer:
   image:
     name: "kaburi/hs-server"
-    version: "76"
+    version: "77"
   service:
     protocol: TCP
     port: 4020
