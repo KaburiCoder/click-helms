@@ -10,3 +10,7 @@ spec:
       protocol: {{ .Values.server.service.protocol }}
       port: {{ .Values.server.service.port }}
       targetPort: {{ .Values.server.service.port }}
+    - name: {{ .Release.Name }}-grpc
+      protocol: TCP
+      port: {{ .Values.server.service.grpcPort }}
+      targetPort: {{ .Values.server.service.grpcPort }}
