@@ -19,6 +19,7 @@ server:
   service:
     protocol: TCP
     port: 3000
+    grpcPort: 5000
 
 ingress:
   name: click-app-ingress
