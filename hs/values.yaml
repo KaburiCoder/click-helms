@@ -7,7 +7,7 @@ replicaCount: 1
 hsClient:
   image:
     name: "kaburi/hs-client"
-    version: "82"
+    version: "83"
   service:
     protocol: TCP
     port: 3020
