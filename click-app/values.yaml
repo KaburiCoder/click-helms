@@ -15,7 +15,7 @@ client:
 server:
   image:
     name: "kaburi/click-app-server"
-    version: "21"
+    version: "22"
   service:
     protocol: TCP
     port: 3000
