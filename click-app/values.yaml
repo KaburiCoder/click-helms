@@ -7,7 +7,7 @@ replicaCount: 1
 client:
   image:
     name: "kaburi/click-app-client"
-    version: "58"
+    version: "59"
   service:
     protocol: TCP
     port: 80
