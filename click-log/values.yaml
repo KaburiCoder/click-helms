@@ -11,7 +11,7 @@ replicaCount: 1
 server:
   image:
     name: "kaburi/click-log-server"
-    version: "57"
+    version: "58"
   service:
     protocol: TCP
     port: 3000
