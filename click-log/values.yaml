@@ -1,12 +1,12 @@
 replicaCount: 1
 
-# client:
-#   image:
-#     name: "kaburi/click-log-client"
-#     version: "10"
-#   service:
-#     protocol: TCP
-#     port: 3010
+client:
+  image:
+    name: "kaburi/click-log-client"
+    version: "1"
+  service:
+    protocol: TCP
+    port: 80
 
 server:
   image:
@@ -26,18 +26,16 @@ ingress:
     nginx.ingress.kubernetes.io/hsts: 'true'
     nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
   hosts:
-  # - host: log.click-soft.co.kr     
-  #   paths:
-  #   - path: /?(.*)
-  #     pathType: ImplementationSpecific
-  #     backend:
-  #       service:
-  #         name: click-log-client-svc
-  #         port:
-  #           number: 3010
   - host: log.click-soft.co.kr     
     paths:
     - path: /?(.*)
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: click-log-client-svc
+          port:
+            number: 80
+    - path: /api/?(.*)
       pathType: ImplementationSpecific
       backend:
         service:

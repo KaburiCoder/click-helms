@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-client-depl
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-client
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-client
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-client
+        image: "{{ .Values.client.image.name }}:{{ .Values.client.image.version }}"
+        env:
+        - name: VITE_HEADER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: click-log-secr
+              key: click_header_key
+        - name: VITE_HEADER_VALUE
+          valueFrom:
+            secretKeyRef:
+              name: click-log-secr
+              key: click_header_value

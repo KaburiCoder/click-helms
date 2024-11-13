@@ -28,3 +28,28 @@ spec:
               key: cpm_database_url
         - name: NODE_ENV
           value: production
+        - name: JWT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: click-log-secr
+              key: jwt_key
+        - name: USER_ID
+          valueFrom:
+            secretKeyRef:
+              name: click-log-secr
+              key: user_id
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: click-log-secr
+              key: password
+        - name: CLICK_HEADER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: click-log-secr
+              key: click_header_key
+        - name: CLICK_HEADER_VALUE
+          valueFrom:
+            secretKeyRef:
+              name: click-log-secr
+              key: click_header_value

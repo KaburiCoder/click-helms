@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-client-svc
+  labels:
+    app: {{ .Release.Name }}-client
+    monitoring: "enabled"  # 추가된 레이블
+spec:
+  selector:
+    app: {{ .Release.Name }}-client
+  ports:
+    - name: {{ .Release.Name }}-client
+      protocol: {{ .Values.client.service.protocol }}
+      port: {{ .Values.client.service.port }}
+      targetPort: {{ .Values.client.service.port }}
