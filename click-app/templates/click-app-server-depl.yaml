@@ -15,6 +15,23 @@ spec:
       containers:
       - name: {{ .Release.Name }}-server
         image: "{{ .Values.server.image.name }}:{{ .Values.server.image.version }}"
+        {{- if .Values.server.resources }}
+        resources:
+          limits:
+            memory: {{ .Values.server.resources.limits.memory | default "256Mi" }}    # 메모리 제한
+            cpu: {{ .Values.server.resources.limits.cpu | default "500m" }}           # CPU 제한
+          requests:
+            memory: {{ .Values.server.resources.requests.memory | default "128Mi" }}  # 최소 메모리 요청
+            cpu: {{ .Values.server.resources.requests.cpu | default "250m" }}         # 최소 CPU 요청
+        {{- else }}
+        resources:
+          limits:
+            memory: "256Mi"    # 메모리 제한
+            cpu: "500m"        # CPU 제한
+          requests:
+            memory: "128Mi"    # 최소 메모리 요청
+            cpu: "250m"        # 최소 CPU 요청
+        {{- end }}
         env:
         - name: NODE_ENV
           value: "production"

@@ -11,6 +11,13 @@ hsClient:
   service:
     protocol: TCP
     port: 3020
+  resources:
+    limits:
+      memory: "256Mi"    # 메모리 제한
+      cpu: "500m"        # CPU 제한
+    requests:
+      memory: "128Mi"    # 최소 메모리 요청
+      cpu: "250m"
 
 hsServer:
   image:
@@ -19,6 +26,13 @@ hsServer:
   service:
     protocol: TCP
     port: 4020
+  resources:
+    limits:
+      memory: "256Mi"    # 메모리 제한
+      cpu: "500m"        # CPU 제한
+    requests:
+      memory: "128Mi"    # 최소 메모리 요청
+      cpu: "250m"
 
 ingress:
   name: hs-ingress

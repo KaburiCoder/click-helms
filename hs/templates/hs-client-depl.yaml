@@ -15,6 +15,23 @@ spec:
       containers:
       - name: {{ .Release.Name }}-client
         image: "{{ .Values.hsClient.image.name }}:{{ .Values.hsClient.image.version }}"
+        {{- if .Values.hsClient.resources }}
+        resources:
+          limits:
+            memory: {{ .Values.hsClient.resources.limits.memory | default "256Mi" }}    # 메모리 제한
+            cpu: {{ .Values.hsClient.resources.limits.cpu | default "500m" }}           # CPU 제한
+          requests:
+            memory: {{ .Values.hsClient.resources.requests.memory | default "128Mi" }}  # 최소 메모리 요청
+            cpu: {{ .Values.hsClient.resources.requests.cpu | default "250m" }}         # 최소 CPU 요청
+        {{- else }}
+        resources:
+          limits:
+            memory: "256Mi"    # 메모리 제한
+            cpu: "500m"        # CPU 제한
+          requests:
+            memory: "128Mi"    # 최소 메모리 요청
+            cpu: "250m"        # 최소 CPU 요청
+        {{- end }}
         env:
         - name: NEXT_PUBLIC_KAKAO_JS_KEY
           valueFrom:

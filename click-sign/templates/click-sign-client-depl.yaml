@@ -15,6 +15,23 @@ spec:
       containers:
       - name: {{ .Release.Name }}-client
         image: "{{ .Values.client.image.name }}:{{ .Values.client.image.version }}"
+        {{- if .Values.client.resources }}
+        resources:
+          limits:
+            memory: {{ .Values.client.resources.limits.memory | default "256Mi" }}    # 메모리 제한
+            cpu: {{ .Values.client.resources.limits.cpu | default "500m" }}           # CPU 제한
+          requests:
+            memory: {{ .Values.client.resources.requests.memory | default "128Mi" }}  # 최소 메모리 요청
+            cpu: {{ .Values.client.resources.requests.cpu | default "250m" }}         # 최소 CPU 요청
+        {{- else }}
+        resources:
+          limits:
+            memory: "256Mi"    # 메모리 제한
+            cpu: "500m"        # CPU 제한
+          requests:
+            memory: "128Mi"    # 최소 메모리 요청
+            cpu: "250m"        # 최소 CPU 요청
+        {{- end }}
         env:
         - name: DATABASE_URL
           valueFrom:
