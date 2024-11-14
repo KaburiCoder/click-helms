@@ -3,7 +3,7 @@ replicaCount: 1
 client:
   image:
     name: "kaburi/click-log-client"
-    version: "12"
+    version: "13"
   service:
     protocol: TCP
     port: 80
