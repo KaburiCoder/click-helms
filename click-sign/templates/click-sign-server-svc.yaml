@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     app: {{ .Release.Name }}-server
+    monitoring: "enabled"
   ports:
     - name: {{ .Release.Name }}-server
       protocol: {{ .Values.server.service.protocol }}
