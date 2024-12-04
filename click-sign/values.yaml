@@ -22,7 +22,7 @@ client:
 server:
   image:
     name: "kaburi/click-sign-server"
-    version: "13"
+    version: "14"
   service:
     protocol: TCP
     port: 4001
