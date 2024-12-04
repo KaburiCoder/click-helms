@@ -4121,6 +4121,15 @@ prometheus:
         - port: click-log-server             # 서비스의 포트
           path: /api/metrics         # 메트릭 엔드포인트 경로
           interval: 30s          # 메트릭 수집 주기
+    - name: "click-sign-server-monitor"
+      namespace: "default"  # 모니터링할 서비스가 있는 네임스페이스
+      selector:
+        matchLabels:
+          app: click-sign-server  # 모니터링할 서비스의 레이블
+      endpoints:
+        - port: click-sign-server             # 서비스의 포트
+          path: /metrics         # 메트릭 엔드포인트 경로
+          interval: 30s          # 메트릭 수집 주기
     - name: "hs-server-monitor"
       namespace: "default"  # 모니터링할 서비스가 있는 네임스페이스
       selector:
