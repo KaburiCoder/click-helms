@@ -18,7 +18,7 @@ client:
 server:
   image:
     name: "kaburi/click-log-server"
-    version: "95"
+    version: "96"
   service:
     protocol: TCP
     port: 3000
