@@ -38,6 +38,11 @@ spec:
             secretKeyRef:
               name: click-log-secr
               key: click_database_url
+        - name: COLLECT_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: collect-log-secr
+              key: collect_database_url
         - name: CPM_DATABASE_URL
           valueFrom:
             secretKeyRef:
