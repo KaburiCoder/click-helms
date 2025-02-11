@@ -7,7 +7,7 @@ replicaCount: 1
 client:
   image:
     name: "kaburi/click-sign-client"
-    version: "10"
+    version: "11"
   service:
     protocol: TCP
     port: 3001
