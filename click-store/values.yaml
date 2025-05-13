@@ -7,7 +7,7 @@ replicaCount: 1
 client:
   image:
     name: "kaburi/click-store"
-    version: "140"
+    version: "141"
   service:
     protocol: TCP
     port: 3000
@@ -15,7 +15,7 @@ client:
 testClient:
   image:
     name: "kaburi/click-store"
-    version: "140"
+    version: "141"
   service:
     protocol: TCP
     port: 3000
