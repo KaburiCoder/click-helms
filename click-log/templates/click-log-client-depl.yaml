@@ -43,18 +43,3 @@ spec:
             secretKeyRef:
               name: click-log-secr
               key: click_header_value
-        - name: SMS_DATABASE_CONFIG
-          valueFrom:
-            secretKeyRef:
-              name: click-log-secr
-              key: sms_database_config
-        - name: SMS_ID
-          valueFrom:
-            secretKeyRef:
-              name: click-log-secr
-              key: sms_id
-        - name: SMS_CALLBACK
-          valueFrom:
-            secretKeyRef:
-              name: click-log-secr
-              key: sms_callback
