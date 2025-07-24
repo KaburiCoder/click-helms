@@ -1005,10 +1005,11 @@ grafana:
     ##
     # hosts:
     #   - grafana.domain.com
-    hosts: ["grafana.click-soft.co.kr"]
+    hosts: ["click-soft.co.kr"]
 
     ## Path for grafana ingress
-    path: /
+    path: /grafana
+    pathType: Prefix
 
     ## TLS configuration for grafana Ingress
     ## Secret must be manually created in the namespace
