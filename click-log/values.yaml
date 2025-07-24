@@ -24,11 +24,11 @@ server:
     port: 3000
   resources:
     limits:
-      memory: "256Mi"    # 메모리 제한
-      cpu: "500m"        # CPU 제한
+      cpu: "1000m"      # 1 vCPU
+      memory: "2048Mi"  # 2Gi 메모리
     requests:
-      memory: "128Mi"    # 최소 메모리 요청
-      cpu: "250m"
+      cpu: "500m"
+      memory: "1024Mi"
 
 ingress:
   name: click-log-ingress
