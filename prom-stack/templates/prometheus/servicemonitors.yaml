@@ -7,8 +7,7 @@ items:
     kind: ServiceMonitor
     metadata:
       name: {{ .name }}
-      namespace: {{ .namespace }}
-      #namespace: {{ template "kube-prometheus-stack.namespace" $ }}
+      namespace: {{ template "kube-prometheus-stack.namespace" $ }}
       labels:
         app: {{ template "kube-prometheus-stack.name" $ }}-prometheus
 {{ include "kube-prometheus-stack.labels" $ | indent 8 }}
@@ -36,13 +35,8 @@ items:
       podTargetLabels:
 {{ toYaml .podTargetLabels | indent 8 }}
     {{- end }}
-    {{- if .metricRelabelings }}
-      metricRelabelings:
-{{ toYaml .metricRelabelings | indent 8 }}
-    {{- end }}
-    {{- if .relabelings }}
-      relabelings:
-{{ toYaml .relabelings | indent 8 }}
+    {{- if .fallbackScrapeProtocol }}
+      fallbackScrapeProtocol: {{ .fallbackScrapeProtocol }}
     {{- end }}
 {{- end }}
 {{- end }}
