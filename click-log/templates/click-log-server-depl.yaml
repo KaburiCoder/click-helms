@@ -18,11 +18,11 @@ spec:
         {{- if .Values.client.resources }}
         resources:
           limits:
-            memory: {{ .Values.client.resources.limits.memory | default "256Mi" }}    # 메모리 제한
-            cpu: {{ .Values.client.resources.limits.cpu | default "500m" }}           # CPU 제한
+            memory: {{ .Values.server.resources.limits.memory | default "256Mi" }}    # 메모리 제한
+            cpu: {{ .Values.server.resources.limits.cpu | default "500m" }}           # CPU 제한
           requests:
-            memory: {{ .Values.client.resources.requests.memory | default "128Mi" }}  # 최소 메모리 요청
-            cpu: {{ .Values.client.resources.requests.cpu | default "250m" }}         # 최소 CPU 요청
+            memory: {{ .Values.server.resources.requests.memory | default "128Mi" }}  # 최소 메모리 요청
+            cpu: {{ .Values.server.resources.requests.cpu | default "250m" }}         # 최소 CPU 요청
         {{- else }}
         resources:
           limits:
