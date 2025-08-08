@@ -4661,6 +4661,9 @@ prometheus:
   additionalServiceMonitors: 
     - name: "click-log-server-monitor"
       namespace: "default"  # 모니터링할 서비스가 있는 네임스페이스
+      namespaceSelector:
+        matchNames:
+          - default
       selector:
         matchLabels:
           app: click-log-server  # 모니터링할 서비스의 레이블
