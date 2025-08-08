@@ -13,7 +13,7 @@ client:
     port: 3001
   resources:
     limits:
-      memory: "256Mi"    # 메모리 제한
+      memory: "1Gi"    # 메모리 제한
       cpu: "500m"        # CPU 제한
     requests:
       memory: "128Mi"    # 최소 메모리 요청
